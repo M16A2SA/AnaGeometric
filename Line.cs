@@ -28,7 +28,7 @@ public class Line
     /// <param name="b"></param>
     /// <param name="c"></param>
     /// <param name="t"></param>
-    public Line(double a = 1, double b = 1, double c = 1, LineType t = LineType.General)
+    public Line(double a, double b, double c, LineType t = LineType.General)
     {
         if(a == 0 && b == 0)
         {
@@ -41,6 +41,10 @@ public class Line
         k = -A / B;
         this.b = -C / B;
         LType = t;
+    }
+    public Line() : this(1, -1, 0, LineType.General)
+    {
+
     }
     /// <summary>
     /// Gets the maximum and minimum distance between this instance and the specified circle
