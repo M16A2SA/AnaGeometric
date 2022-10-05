@@ -9,12 +9,15 @@ class Program
         Point p1 = new Point(114, 514);
         Point O = new Point(0, 0);
         Line l1 = new Line(1, 0, 1, LineType.General);
-        Line l2 = new Line(2, 0, -3, LineType.General);
+        Line l2 = new Line(2, -2, -3, LineType.General);
         // Circle C1 = new Circle(1, 2, 1);
         //Console.WriteLine($"{p1}关于{l1}的对称点事");
         //Console.WriteLine(p1.GetSymmetryPoint(l1) + "\n");
-        Console.WriteLine($"l1: {l1}, l2: {l2}");
-        Console.WriteLine($"l1和l2的交点是{l1.GetIntersectionPoint(l2)}");
+        //Console.WriteLine($"l1: {l1}, l2: {l2}");
+        //Console.WriteLine($"l1和l2的交点是{l1.GetIntersectionPoint(l2)}");
+        Console.WriteLine(l2);
+        l2.Convert(LineType.Slope_Intercept);
+        Console.WriteLine(l2);
 
         /*
         Console.WriteLine("p1: " + p1.ToString());

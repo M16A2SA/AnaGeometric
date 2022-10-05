@@ -8,12 +8,12 @@ public class Circle
 {
     public Circle(double param1 = 0, double param2 = 0, double param3 = 1, CircleType CType = CircleType.Standard)
     {
-        if (param3 <= 0)
-        {
-            throw new System.ArgumentException("The radius can't be 0 or smaller than 0", "R");
-        }
         if (CType == CircleType.Standard)
         {
+            if(param3 <= 0)
+            {
+                throw new System.ArgumentException("The radius can't be 0 or smaller than 0", nameof(param3));
+            }
             a = param1;
             b = param2;
             r = param3;
@@ -40,16 +40,30 @@ public class Circle
     }
     public double GetRadius() => r;
     public Point GetCenter() => new Point(a, b);
-    public override string ToString() => $"(x{-a})^2 + (y{-b})^2 = {r * r}";
+    public override string ToString()
+    {
+        if(CType == CircleType.Standard) 
+            return $"(x{-a})^2 + (y{-b})^2 = {r * r}";
+        else if(CType == CircleType.General)
+        {
+
+            return $"x^2 + y^2";
+        }
+        return string.Empty;
+    }
+
     public double GetParam(char ch)
     {
-        switch (ch)
+        return ch switch
         {
-            case 'a': return a;
-            case 'b': return b;
-            case 'r': return r;
-            default: return double.NaN;
-        }
+            'a' => a,
+            'b' => b,
+            'r' => r,
+            'D' => D,
+            'E' => E,
+            'F' => F,
+            _ => double.NaN,
+        };
     }
     private double a, b, r, D, E, F;
     private CircleType CType;
