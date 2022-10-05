@@ -38,8 +38,8 @@ public class Line
         B = b;
         C = c;
 
-        k = -this.A / this.B;
-        this.b = -this.C / this.B;
+        k = -A / B;
+        this.b = -C / B;
         LType = t;
     }
     /// <summary>
@@ -71,7 +71,7 @@ public class Line
         LType = t;
         switch(t)
         {
-            case LineType.Point_Oblique:
+            case LineType.Slope_Intercept:
                 k = -A / B;
                 b = -C / B;
                 return new Line(k, b);
@@ -80,6 +80,10 @@ public class Line
                 B = -1;
                 C = b;
                 return new Line(A, B, C);
+            case LineType.Point_Oblique:
+                break;
+            default:
+                break;
         }
         return new Line();
     }
@@ -88,18 +92,15 @@ public class Line
     /// </summary>
     /// <param name="ch">A, B or C in General form or k, b in slope-intercept form</param>
     /// <returns>The specified parameter</returns>
-    public double GetParam(char ch)
+    public double GetParam(char ch) => ch switch
     {
-        switch(ch)
-        {
-            case 'A': return A;
-            case 'B': return B;
-            case 'C': return C;
-            case 'k': return k;
-            case 'b': return b;
-            default: return double.NaN;
-        }
-    }
+        'A' => A,
+        'B' => B,
+        'C' => C,
+        'k' => k,
+        'b' => b,
+        _ => double.NaN,
+    };
     public Point GetIntersectionPoint(Line l2)
     {
         double A2 = l2.GetParam('A');
