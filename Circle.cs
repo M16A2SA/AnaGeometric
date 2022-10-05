@@ -6,9 +6,9 @@ public enum CircleType
 }
 public class Circle
 {
-    public Circle(double param1 = 0, double param2 = 0, double param3 = 1, CircleType CType = CircleType.Standard)
+    public Circle(double param1 = 0, double param2 = 0, double param3 = 1, CircleType t = CircleType.Standard)
     {
-        if (CType == CircleType.Standard)
+        if (t == CircleType.Standard)
         {
             if(param3 <= 0)
             {
@@ -20,10 +20,10 @@ public class Circle
             D = -2 * a;
             E = -2 * b;
             F = a * a + b * b - r * r;
-            this.CType = CType;
+            CType = t;
             return;
         }
-        else if (CType == CircleType.General)
+        else if (t == CircleType.General)
         {
             D = param1;
             E = param2;
@@ -35,7 +35,7 @@ public class Circle
             a = -D / 2;
             b = -E / 2;
             r = System.Math.Sqrt(D * D + E * E - 4 * F) / 2;
-            this.CType = CType;
+            CType = t;
         }
     }
     public double GetRadius() => r;

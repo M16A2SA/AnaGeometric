@@ -14,11 +14,11 @@ public class Line
     /// <param name="B"></param>
     public Line(double K, double B)
     {
-        this.k = K;
-        this.b = B;
-        this.A = k;
+        k = K;
+        b = B;
+        A = k;
         this.B = -1;
-        this.C = b;
+        C = b;
         LType = LineType.Slope_Intercept;
     }
     /// <summary>
@@ -34,11 +34,11 @@ public class Line
         {
             throw new System.ArgumentException("A and B can't both be 0");
         }
-        this.A = a;
-        this.B = b;
-        this.C = c;
+        A = a;
+        B = b;
+        C = c;
 
-        this.k = -this.A / this.B;
+        k = -this.A / this.B;
         this.b = -this.C / this.B;
         LType = t;
     }
@@ -127,7 +127,7 @@ public class Line
                 string pb = b == 0 ? "" : (b < 0 ? $"{b}" : $"+{b}");
                 return $"y = {pk}{pb}";
         }
-        return System.String.Empty;
+        return string.Empty;
     }
 
     private LineType LType;
