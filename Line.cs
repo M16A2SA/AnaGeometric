@@ -120,7 +120,7 @@ public class Line
         // double x = (A2 * B * C - A * B * C2) / (A * A * B2 - A * B);
         // double y = (A2 * C - A * C2) / (A * B2 - B);
         double x = -(B2 * C - B * C2) / (B2 * A - B * A2);
-        double y = -(A * C2 - C * A2) / (B2 * A - B * A2);
+        double y = -(C2 * A - C * A2) / (B2 * A - B * A2);
         return new Point(x, y);
     }
     override public string ToString()

@@ -62,16 +62,23 @@ public class Point
         double A = l1.GetParam('A');
         double B = l1.GetParam('B');
         double C = l1.GetParam('C');
-        double x = 2 * A * (X * B * B + Y * B + C) / (A * A + B * B) - X;
-        double y = 2 * A * A * (X * B + Y + C / B) / (A * A + B * B) - C / B - Y;
-        return new Point(-x, -y);
+        //double x = 2 * A * (X * B * B + Y * B + C) / (A * A + B * B) - X;
+        //double y = 2 * A * A * (X * B + Y + C / B) / (A * A + B * B) - C / B - Y;
+        //double x = 2 * (X * B * B / A - B * Y - C) / (A + B * B / A) - X;
+        //double y = 2 * (-C / B - (X * B - A * Y - A * C / B) / (A + B * B / A) - Y);
+        double x = X - 2 * A * (A * X + B * Y + C) / (A * A + B * B);
+        double y = Y - 2 * B * (A * X + B * Y + C) / (A * A + B * B);
+        return new Point(x, y);
     }
-
+    public override bool Equals(object? obj)
+    {
+        return obj is Point point &&
+               X == point.X && Y == point.Y;
+    }
+    public override int GetHashCode() => base.GetHashCode();
     public override string ToString() => $"({X}, {Y})";
     public double GetX() => X;
     public double GetY() => Y;
-
-    double X { get; set; }
-    double Y { get; set; }
-
-};
+    private double X { get;}
+    private double Y { get;}
+}
