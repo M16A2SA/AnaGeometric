@@ -1,6 +1,8 @@
 using System;
 namespace AnaGeometric;
-
+/// <summary>
+/// Represents a point in the rectangular coordinate system.
+/// </summary>
 public class Point
 {
     /// <summary>
@@ -65,10 +67,7 @@ public class Point
         return new Point(-x, -y);
     }
 
-    public override string ToString()
-    {
-        return $"({X}, {Y})";
-    }
+    public override string ToString() => $"({X}, {Y})";
     public double GetX() => X;
     public double GetY() => Y;
 

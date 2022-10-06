@@ -5,6 +5,9 @@ public enum LineType
     Point_Oblique = 1,
     Slope_Intercept = 2,
 }
+/// <summary>
+/// Represents a line in the rectangular coordinate system.
+/// </summary>
 public class Line
 {
     /// <summary>
@@ -51,7 +54,8 @@ public class Line
     /// </summary>
     /// <param name="C1"></param>
     /// <returns>A double array, with the first element represents the minimum distance, and 
-    /// the second element represents the maximum distance.</returns>
+    /// the second element represents the maximum distance. If the line intersects with the 
+    /// circle then the first element will be NaN</returns>
     public double[] GetDistanceFromCircle(Circle C1)
     {
         double[] result = { 0, 0 };
@@ -88,7 +92,8 @@ public class Line
                 break;
             default:
                 break;
-        }
+        }// 点斜式应使用在x轴上的点，在y轴上的点可以通过斜截式得到
+         //TODO Waiting for implementation...
         return new Line();
     }
     /// <summary>
@@ -103,7 +108,7 @@ public class Line
         'C' => C,
         'k' => k,
         'b' => b,
-        _ => double.NaN,
+         _  => double.NaN,
     };
     public Point GetIntersectionPoint(Line l2)
     {

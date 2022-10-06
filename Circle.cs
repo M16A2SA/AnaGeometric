@@ -4,6 +4,9 @@ public enum CircleType
     Standard,
     General
 }
+/// <summary>
+/// Represents a circle in the rectangular coordinate system.
+/// </summary>
 public class Circle
 {
     public Circle(double param1 = 0, double param2 = 0, double param3 = 1, CircleType t = CircleType.Standard)
