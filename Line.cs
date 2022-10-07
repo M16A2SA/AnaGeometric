@@ -2,7 +2,7 @@ namespace AnaGeometric;
 public enum LineType
 {
     General = 0,
-    Point_Oblique = 1,
+    Point_Slope = 1,
     Slope_Intercept = 2,
 }
 /// <summary>
@@ -74,12 +74,23 @@ public class Line
         }
         return result;
     }
+    /// <summary>
+    /// Converts this instance to the specified type.
+    /// When converting to point oblique type the point is the intersection
+    /// point of the line and the x-axis. Or if it doesn't exist it's the point
+    /// with the y-axis
+    /// </summary>
+    /// <param name="t"></param>
+    /// <returns>The converted line.</returns>
+    /// <exception cref="System.ArithmeticException">When switching to slope-intercept form and
+    /// k doesn't exist.</exception>
     public Line Convert(LineType t)
     {
         LType = t;
         switch(t)
         {
             case LineType.Slope_Intercept:
+                if(B == 0) throw new System.ArithmeticException("k for this line doesn't exist");
                 k = -A / B;
                 b = -C / B;
                 return new Line(k, b);
@@ -88,8 +99,17 @@ public class Line
                 B = -1;
                 C = b;
                 return new Line(A, B, C);
-            case LineType.Point_Oblique:
-                break;
+            case LineType.Point_Slope:
+                if(A == 0)
+                {
+                    _y = -C / B;
+                    _x = 0;
+                } else
+                {
+                    _x = -C / A;
+                    _y = 0;
+                }
+                return new Line(A, B, C, LineType.Point_Slope);
             default:
                 break;
         }// 点斜式应使用在x轴上的点，在y轴上的点可以通过斜截式得到
@@ -136,6 +156,11 @@ public class Line
                 string pk = k == 0 ? "" : (k == 1 ? "x" : (k == -1 ? "-x" : $"{k}x"));
                 string pb = b == 0 ? "" : (b < 0 ? $"{b}" : $"+{b}");
                 return $"y = {pk}{pb}";
+            case LineType.Point_Slope:
+                pk = k == 0 ? "" : (k == 1 ? "" : (k == -1 ? "-" : $"{k}"));
+                string px = _x == 0 ? "" : (_x < 0 ? $"(x-{_x})" : $"(x+{_x})");
+                string py = _y == 0 ? "" : (_y < 0 ? $"{_y}" : $"+{_x}");
+                return $"(y{py})={pk}{px}"; //FIXME 
         }
         return string.Empty;
     }
@@ -144,6 +169,9 @@ public class Line
     private double A;
     private double B;
     private double C;
+
+    private double _x;
+    private double _y;
 
     private double k;
     private double b;

@@ -21,9 +21,5 @@ public readonly struct Vector
     public static double operator *(Vector a, Vector b)
         => a._x * b._x + a._y * b._y;
 
-    public bool IsPerpendicular(Vector a)
-    {
-        if(this * a == 0) return true;
-        return false;
-    }
+    public bool IsPerpendicular(Vector a) => this * a == 0;
 }
