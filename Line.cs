@@ -60,8 +60,8 @@ public class Line
     {
         double[] result = { 0, 0 };
 
-        Point CC1 = C1.GetCenter();
-        double radius = C1.GetRadius();
+        Point CC1 = C1.Center;
+        double radius = C1.Radius;
         double dist = CC1.GetDistanceFromLine(this);
         if(dist - radius < 0)
         {
@@ -76,7 +76,7 @@ public class Line
     }
     /// <summary>
     /// Converts this instance to the specified type.
-    /// When converting to point oblique type the point is the intersection
+    /// When converting to point slope type the point is the intersection
     /// point of the line and the x-axis. Or if it doesn't exist it's the point
     /// with the y-axis
     /// </summary>
@@ -112,8 +112,7 @@ public class Line
                 return new Line(A, B, C, LineType.Point_Slope);
             default:
                 break;
-        }// 点斜式应使用在x轴上的点，在y轴上的点可以通过斜截式得到
-         //TODO Waiting for implementation...
+        }
         return new Line();
     }
     /// <summary>
@@ -158,9 +157,9 @@ public class Line
                 return $"y = {pk}{pb}";
             case LineType.Point_Slope:
                 pk = k == 0 ? "" : (k == 1 ? "" : (k == -1 ? "-" : $"{k}"));
-                string px = _x == 0 ? "" : (_x < 0 ? $"(x-{_x})" : $"(x+{_x})");
-                string py = _y == 0 ? "" : (_y < 0 ? $"{_y}" : $"+{_x}");
-                return $"(y{py})={pk}{px}"; //FIXME 
+                string px = _x == 0 ? "x" : (_x < 0 ? $"(x{_x})" : $"(x+{_x})");
+                string py = _y == 0 ? "y" : (_y < 0 ? $"(y{_y})" : $"(y+{_y})");
+                return $"{py}={pk}{px}"; //FIXME
         }
         return string.Empty;
     }
