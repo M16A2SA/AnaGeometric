@@ -27,7 +27,7 @@ public class Circle
     {
         if (t == CircleType.Standard)
         {
-            if(param3 <= 0)
+            if (param3 <= 0)
             {
                 throw new System.ArgumentException("Radius is smaller than 0 or equals to 0", nameof(param3));
             }
@@ -61,10 +61,11 @@ public class Circle
         double x2 = c.a, y2 = c.b;
         double r1 = r, r2 = c.r;
         double R = System.Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-        if(R == r1 + r2)
+        if (R == r1 + r2)
         {
 
-        }else if(R > r1 + r2)
+        }
+        else if (R > r1 + r2)
         {
             throw new System.ArithmeticException("The circles do not intersect");
         }
@@ -76,14 +77,14 @@ public class Circle
             System.Math.Sqrt(2 * (r1 * r1 + r2 * r2) / R * R - (r1 * r1 - r2 * r2) * (r1 * r1 - r2 * r2) / R * R * R * R - 1) / 2 * (x1 - x2);
         double res_y2 = (y1 + y2) / 2 + (r1 * r1 - r2 * r2) / (2 * R * R) * (y2 - y1) -
             System.Math.Sqrt(2 * (r1 * r1 + r2 * r2) / R * R - (r1 * r1 - r2 * r2) * (r1 * r1 - r2 * r2) / R * R * R * R - 1) / 2 * (x1 - x2);
-        Point[] res = { new(res_x1, res_y1), new (res_x2, res_y2)};
+        Point[] res = { new(res_x1, res_y1), new(res_x2, res_y2) };
         return res;
     }
     public override string ToString()
     {
-        if(CType == CircleType.Standard) 
+        if (CType == CircleType.Standard)
             return $"(x{-a})^2 + (y{-b})^2 = {r * r}";
-        else if(CType == CircleType.General)
+        else if (CType == CircleType.General)
             return $"x^2 + y^2 + {D}x + {E}y + {F} = 0";
         return string.Empty;
     }
@@ -96,7 +97,7 @@ public class Circle
         'D' => D,
         'E' => E,
         'F' => F,
-         _  => double.NaN,
+        _ => double.NaN,
     };
     public double Radius => r;
     public Point Center => new(a, b);

@@ -33,7 +33,7 @@ public class Line
     /// <param name="t"></param>
     public Line(double a, double b, double c, LineType t = LineType.General)
     {
-        if(a == 0 && b == 0)
+        if (a == 0 && b == 0)
         {
             throw new System.ArgumentException("A and B can't both be 0");
         }
@@ -45,10 +45,7 @@ public class Line
         this.b = -C / B;
         LType = t;
     }
-    public Line() : this(1, -1, 0, LineType.General)
-    {
-
-    }
+    public Line() : this(1, -1, 0, LineType.General) { }
     /// <summary>
     /// Gets the maximum and minimum distance between this instance and the specified circle
     /// </summary>
@@ -63,11 +60,12 @@ public class Line
         Point CC1 = C1.Center;
         double radius = C1.Radius;
         double dist = CC1.GetDistanceFromLine(this);
-        if(dist - radius < 0)
+        if (dist - radius < 0)
         {
             result[0] = double.NaN;
             return result;
-        } else
+        }
+        else
         {
             result[0] = dist - radius;
             result[1] = dist + radius;
@@ -87,10 +85,10 @@ public class Line
     public Line Convert(LineType t)
     {
         LType = t;
-        switch(t)
+        switch (t)
         {
             case LineType.Slope_Intercept:
-                if(B == 0) throw new System.ArithmeticException("k for this line doesn't exist");
+                if (B == 0) throw new System.ArithmeticException("k for this line doesn't exist");
                 k = -A / B;
                 b = -C / B;
                 return new Line(k, b);
@@ -100,11 +98,12 @@ public class Line
                 C = b;
                 return new Line(A, B, C);
             case LineType.Point_Slope:
-                if(A == 0)
+                if (A == 0)
                 {
                     _y = -C / B;
                     _x = 0;
-                } else
+                }
+                else
                 {
                     _x = -C / A;
                     _y = 0;
@@ -127,13 +126,13 @@ public class Line
         'C' => C,
         'k' => k,
         'b' => b,
-         _  => double.NaN,
+        _ => double.NaN,
     };
     public Point GetIntersectionPoint(Line l2)
     {
         double A2 = l2.GetParam('A');
         double B2 = l2.GetParam('B');
-        if(A * B2 == A2 * B) throw new System.Exception("The lines do not intersect.");
+        if (A * B2 == A2 * B) throw new System.Exception("The lines do not intersect.");
         double C2 = l2.GetParam('C');
 
         // double x = (A2 * B * C - A * B * C2) / (A * A * B2 - A * B);
@@ -144,7 +143,7 @@ public class Line
     }
     override public string ToString()
     {
-        switch(LType)
+        switch (LType)
         {
             case LineType.General:
                 string pA = A == 0 ? "" : (A == 1 ? "x" : (A == -1 ? "-x" : $"{A}x"));
