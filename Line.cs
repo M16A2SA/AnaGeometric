@@ -49,7 +49,7 @@ public class Line
     /// <summary>
     /// Gets the maximum and minimum distance between this instance and the specified circle
     /// </summary>
-    /// <param name="C1"></param>
+    /// <param name="C1">The circle</param>
     /// <returns>A double array, with the first element represents the minimum distance, and 
     /// the second element represents the maximum distance. If the line intersects with the 
     /// circle then the first element will be NaN</returns>
@@ -108,7 +108,7 @@ public class Line
                     _x = -C / A;
                     _y = 0;
                 }
-                return new Line(A, B, C, LineType.Point_Slope);
+                return this;
             default:
                 break;
         }

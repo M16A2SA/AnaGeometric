@@ -55,15 +55,13 @@ public class Point
     }
     public double GetSlopeFactor(Point p2)
     {
-        return (X - p2.GetX()) / (Y - p2.GetY());
+        return (X - p2.X) / (Y - p2.Y);
     }
     public Point GetMidPoint(Point p2)
     {
         double x2 = p2.X;
         double y2 = p2.Y;
-        double res_x = (X + x2) / 2;
-        double res_y = (Y + y2) / 2;
-        return new(res_x, res_y);
+        return new((double)((X + x2) / 2), (double)((Y + y2) / 2));
     }
     public Point GetSymmetryPoint(Line l1)
     {
@@ -85,8 +83,6 @@ public class Point
     }
     public override int GetHashCode() => base.GetHashCode();
     public override string ToString() => $"({X}, {Y})";
-    public double GetX() => X;
-    public double GetY() => Y;
-    private double X { get; }
-    private double Y { get; }
+    public double X { get; }
+    public double Y { get; }
 }
